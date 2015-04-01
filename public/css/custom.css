@@ -1,0 +1,15 @@
+body {
+   font-family:  Microsoft YaHei, Sinsum, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.header {
+    background-color: #047AD8 !important;
+}
+
+.header.navbar {
+    height:55px !important;
+}
+
+.page-container {
+    margin-top: 56px !important;
+}
