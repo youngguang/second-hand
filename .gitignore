@@ -7,7 +7,6 @@ target
 .settings/
 .project
 .classpath
-bin
 .DS_Store
 */**/dubbocache/
 node_modules
