@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+var uuid = require('node-uuid');
 
 var rountes = require('./routes/route')
 
@@ -21,11 +23,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(session({
+  genid: function(req) {
+    return uuid()
+  },
+  secret: 'keyboard cat'
+}))
+
 // 路由总控
 rountes(app);
 
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -46,11 +56,11 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   console.log(err);
-  /*res.render('error', {
+  res.render('error', {
     message: err.message,
     error: {}
-  });*/
-});
+  });
+});*/
 
 
 module.exports = app;

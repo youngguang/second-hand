@@ -1,22 +1,3 @@
-*.iml
-*/.idea/
-.idea
-target
-*/**/activemq-data/
-*/**/*.~vsd
-.settings/
-.project
-.classpath
-.DS_Store
-*/**/dubbocache/
-node_modules
-webpack.config.js
+config.js
 
 
-atlassian-ide-plugin.xml
-
-
-/boss/boss-web/src/main/webapp/WEB-INF/ui/node_modules
-build
-rebel.xml
-webpack.config.js
