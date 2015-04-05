@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title>二手哥-会员登录</title>
+    <title>二手哥-会员注册</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <meta content="" name="description"/>
@@ -59,16 +59,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
-    <!-- BEGIN LOGIN FORM -->
-    <form class="login-form" action="/login" method="post">
-        <h3 class="form-title">会员登录</h3>
 
-        <div class="alert alert-danger display-hide">
-            <button class="close" data-close="alert"></button>
-			<span>
-				 请输入用户名或密码
-			</span>
-        </div>
+    <form class="register-form" action="/register" method="post">
+        <h3>会员注册</h3>
+
         <div class="form-group">
             <div class="input-icon">
                 <i class="fa fa-user"></i>
@@ -79,27 +73,29 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="form-group">
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password"/>
+                <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password"
+                       placeholder="密码" name="password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label visible-ie8 visible-ie9">确认密码</label>
+
+            <div class="controls">
+                <div class="input-icon">
+                    <i class="fa fa-check"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="确认密码"
+                           name="rpassword"/>
+                </div>
             </div>
         </div>
         <div class="form-actions">
-            <label class="checkbox" style="margin-left: -5px"><input type="checkbox" name="remember" value="1"/> 记住账号</label>
-            <a href="javascript:void(0);" class="checkbox pull-right">忘记密码?</a>
-        </div>
-        <div class="form-actions" style="margin-top: -30px">
-            <button type="submit" class="btn btn-block blue  pull-right ">
-                登录 <i class="m-icon-swapright m-icon-white"></i>
+            <a id="register-back-btn" class="btn" href="/login">
+                <i class="m-icon-swapleft"></i> 登录 </a>
+            <button type="submit" id="register-submit-btn" class="btn blue pull-right">
+                注册 <i class="m-icon-swapright m-icon-white"></i>
             </button>
         </div>
-
-        <div style="margin-top: -10px">
-            <p>
-                还没有自己的账号 ?&nbsp;
-                <a href="/register">注册</a>
-            </p>
-        </div>
     </form>
-
     <!-- END REGISTRATION FORM -->
 </div>
 <!-- END LOGIN -->
@@ -129,6 +125,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script type="text/javascript" src="plugins/select2/select2.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="js/core/ajax.js" type="text/javascript"></script>
 <script src="scripts/core/app.js" type="text/javascript"></script>
 <script src="scripts/custom/login-soft.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->

@@ -13,3 +13,11 @@ body {
 .page-container {
     margin-top: 56px !important;
 }
+
+.register-form {
+    display: block !important;
+}
+
+.form-actions {
+    margin-top: -10px;
+}
