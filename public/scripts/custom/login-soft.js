@@ -44,8 +44,17 @@ var Login = function () {
         //error.insertAfter(element.closest('.input-icon'));
       },
 
-      submitHandler: function (form) {
-        form.submit();
+      submitHandler: function (form, e) {
+        // 禁止默认提交
+        e.preventDefault();
+        $('#login-submit-btn').prop('disabled', true);
+        ajax('/login', $(form).serialize()).then(function () {
+          $('.alert-danger', $('.login-form')).hide();
+          location.href = location.search.substr(10) || "/";
+        }, function () {
+          $('#login-submit-btn').prop('disabled', false);
+          $('.alert-danger', $('.login-form')).show();
+        })
       }
     });
 
@@ -96,8 +105,7 @@ var Login = function () {
         error.insertAfter(element.closest('.input-icon'));
       },
 
-      submitHandler: function (form) {
-        form.submit();
+      submitHandler: function (form, e) {
       }
     });
 
@@ -255,11 +263,11 @@ var Login = function () {
       submitHandler: function (form, e) {
         // 禁止默认提交
         e.preventDefault();
-        $('register-submit-btn').prop('disabled', true);
+        $('#register-submit-btn').prop('disabled', true);
         ajax('/register', $(form).serialize()).then(function () {
           location.href = '/';
         }, function () {
-          $('register-submit-btn').prop('disabled', false);
+          $('#register-submit-btn').prop('disabled', false);
         })
       }
     });

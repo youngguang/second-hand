@@ -1,20 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var pool = require('./../../dao/mongodbc');
+var pool = require('../../dao/mongodbc');
 var utils = require('utility')
 var crypto = require('crypto')
 
 var com = require('../base/com')
-
-
-var Users = module.exports = new pool.Schema({
-  userId: {type: String},
-  username: {type: String},
-  password: {type: String},
-  regTime: {type: Date, default: Date.now}
-});
-
-var User = pool.db.model('user', Users);
+var User = require('../../table/user');
 
 /**
  *  注册页面
@@ -27,18 +18,19 @@ router.get('/register', function (req, res, next) {
  *  注册请求
  */
 router.post('/register', function (req, res, next) {
-
+  var userId;
   validUsername(req.param('username')).then(function(user) {
     if (user) {
       res.json(com.failJsonRes(null, '该用户名已被使用，请重新输入。'));
     } else {
       var param = {
-        userId: com.getUserId(),
+        userId: userId = com.getUserId(),
         username: req.param('username'),
         password: utils.md5(req.param('password'))
       }
       new User(param).save(function (err) {
         if (!err) {
+          req.session.userId = userId;
           res.json(com.successJsonRes());
         }
         else {

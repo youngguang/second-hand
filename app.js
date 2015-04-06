@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session')
 var uuid = require('node-uuid');
 
-var rountes = require('./routes/route')
+var routes = require('./routes/route')
 
 var app = express();
 
@@ -32,7 +32,7 @@ app.use(session({
 }))
 
 // 路由总控
-rountes(app);
+routes(app);
 
 
 /*app.use(function(req, res, next) {

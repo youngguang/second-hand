@@ -5,8 +5,30 @@ var login = require('./login/login')
 var reg = require('./login/reg')
 var config = require('../config')
 
+var User = require('../table/user');
 
-var rountes = module.exports = function(app) {
+
+var routes = module.exports = function(app) {
+  app.use(function(req, res, next) {
+    if (req.session.userId) {
+      var userId = req.session.userId;
+      User
+        .findOne()
+        .select('userId username')
+        .where('userId', userId)
+        .exec(function(error, user) {
+          if (!error && user) {
+            req.user = user;
+            next();
+          }
+          else {
+            next();
+          }
+        })
+    } else {
+      next()
+    }
+  })
 
   // 未登录可请求
   var beforeLoginRequests = [index, reg]
@@ -15,10 +37,11 @@ var rountes = module.exports = function(app) {
 
   // 登录拦截器
   app.use(function(req, res, next) {
-      if (!req.session.user && req.originalUrl != '/login') {
-        return res.redirect('/login');
+      if (!req.session.userId &&  req.path != '/login') {
+        var redirect = req.hostname + (config.out_port != '80' ? ':' + config.out_port : '')  + req.originalUrl;
+        return res.redirect('/login?redirect=http://' + redirect);
       }
-      next();
+      next()
   })
 
 
